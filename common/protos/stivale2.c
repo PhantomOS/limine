@@ -142,6 +142,7 @@ bool stivale2_load(char *config, char *cmdline) {
     }
 
     print("stivale2: Loading kernel `%s`...\n", kernel_path);
+    print("stivale2: Detected bits as %d\n", bits);
 
     bool want_pmrs = false;
     bool want_fully_virtual = false;
@@ -181,6 +182,8 @@ bool stivale2_load(char *config, char *cmdline) {
                 if (want_pmrs && (stivale2_hdr.flags & (1 << 3))) {
                     want_fully_virtual = true;
                 }
+
+                print("stivale2: Calling elf64_load...\n");
 
                 if (elf64_load(kernel, &entry_point, NULL, &slide,
                                STIVALE2_MMAP_KERNEL_AND_MODULES, kaslr, false,

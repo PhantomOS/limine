@@ -598,6 +598,8 @@ final:
             mem_size = phdr.p_memsz;
         }
 
+        print("elf: Trying to load: memmap_alloc_range(%X, %X, %d, true, false, %d, false)\n", mem_base, mem_size, alloc_type, simulation);
+
         if (!fully_virtual &&
             ((higher_half == true && this_top > 0x80000000)
           || !memmap_alloc_range((size_t)mem_base, (size_t)mem_size, alloc_type, true, false, simulation, false))) {
